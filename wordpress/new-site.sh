@@ -35,6 +35,7 @@ fi
 
 # Create .env file in the folder $1
 cd $1
+rm -rf .git
 cat > .env << EOF
 
 DOMAIN=$2
@@ -50,9 +51,12 @@ LOGGING_OPTIONS_MAX_SIZE=200k
 EOF
 
 # Create docker container with docker compose
-docker-compose up -d
+# docker-compose up -d
 
 # List containers
-docker ps
+# docker ps
 
-echo -e "Script finished please look at the docker containers' logs in case the site is not correctly created"
+# echo -e "Script finished please look at the docker containers' logs in case the site is not correctly created"
+echo -e "To create site please review docker-compose.yml file and execute docker-compose up -d command in the folder that has beeen created"
+echo -e "If you are creating a site in your local environment, please remove the LETSENCRYPT environment variables of the wp service in the docker compose file"
+echo -e "If you are creating a site in your local environment, please don't forget to add the domain in you hosts file"
