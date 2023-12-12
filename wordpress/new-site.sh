@@ -14,7 +14,7 @@
 #
 # Usage
 #
-# ./new-site.sh folder domain email blueprintrepo
+# ./new-site.sh folder domain pmadomain email blueprintrepo
 #-----------------------------------------------------------------------
 
 source ../.env
@@ -25,12 +25,12 @@ echo -e "Domain: $2"
 cd $BASE_SERVER_PATH
 
 # Clone repo with the WordPress - Docker setup in the folder $1
-if [[ $4 == "" ]]; then 
+if [[ $5 == "" ]]; then 
     echo -e "Taking the docker setup from default $WORDPRESS_DOCKER_SETUP_REPO"
     git clone $WORDPRESS_DOCKER_SETUP_REPO $1
 else
     echo -e "Taking the docker setup from $4 repo"
-    git clone $4 $1
+    git clone $5 $1
 fi
 
 # Create .env file in the folder $1
@@ -39,9 +39,10 @@ rm -rf .git
 cat > .env << EOF
 
 DOMAIN=$2
+PMA_DOMAIN=$3
 # PORT=8080
 # PMA_PORT=8081
-LETSENCRYPT_EMAIL=$3
+LETSENCRYPT_EMAIL=$4
 DB_ROOT_PASSWORD=$DEFAULT_DB_ROOT_PASSWORD
 DB_NAME=$DEFAULT_DB_NAME
 DB_USER=$DEFAULT_DB_USER
