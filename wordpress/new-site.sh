@@ -26,7 +26,7 @@ cd $BASE_SERVER_PATH
 
 # Clone repo with the WordPress - Docker setup in the folder $1
 if [[ $4 == "" ]]; then 
-    echo -e "Taking the docker setup from default $WORDPRESS_DOCKER_SETUP_REP"
+    echo -e "Taking the docker setup from default $WORDPRESS_DOCKER_SETUP_REPO"
     git clone $WORDPRESS_DOCKER_SETUP_REPO $1
 else
     echo -e "Taking the docker setup from $4 repo"
@@ -52,13 +52,6 @@ LOGGING_OPTIONS_MAX_SIZE=200k
 
 EOF
 
-# Create docker container with docker compose
-# docker-compose up -d
-
-# List containers
-# docker ps
-
-# echo -e "Script finished please look at the docker containers' logs in case the site is not correctly created"
 echo -e "To create site please review docker-compose.yml file and execute docker-compose up -d command in the folder that has beeen created"
 echo -e "If you are creating a site in your local environment, please remove the LETSENCRYPT environment variables of the wp service in the docker compose file"
 echo -e "If you are creating a site in your local environment, please don't forget to add the domain in you hosts file"
