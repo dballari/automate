@@ -14,7 +14,7 @@
 #
 # Usage
 #
-# ./new-site.sh folder port pmaport blueprintrepo
+# ./new-site.sh folder port pmaport blueprintfolder
 #-----------------------------------------------------------------------
 
 source ../../.env
@@ -25,13 +25,9 @@ echo -e "Domain: $2"
 cd $BASE_SERVER_PATH
 
 # Clone repo with the WordPress - Docker setup in the folder $1
-if [[ $4 == "" ]]; then 
-    echo -e "Taking the docker setup from default $WORDPRESS_DOCKER_SETUP_REPO"
-    git clone $WORDPRESS_DOCKER_SETUP_REPO $1
-else
-    echo -e "Taking the docker setup from $4 repo"
-    git clone $4 $1
-fi
+echo -e "Taking the docker setup from default $WORDPRESS_DOCKER_SETUP_REPO"
+git clone $WORDPRESS_DOCKER_SETUP_REPO $1
+
 
 # Create .env file in the folder $1
 cd $1
@@ -54,6 +50,16 @@ rm docker-compose.yml
 mv docker-compose-loc.yml docker-compose.yml
 rm env.example
 mv env.example.loc env.example
+
+# Copy wp-app and wp-data folders from blueprintfolder
+if [[ $4 == "" ]]; then 
+    echo -e "No wp-app and wp-data folders copied"
+else
+    echo -e "Copying wp-app and wp-data folders from $4"
+    cp -r ${BASE_SERVER_PATH}/$4/wp-app ${BASE_SERVER_PATH}/$1/wp-app
+    cp -r ${BASE_SERVER_PATH}/$4/wp-data ${BASE_SERVER_PATH}/$1/wp-data
+    rm -rf ${BASE_SERVER_PATH}/$1/wp-app/.git
+fi
 
 echo -e "To create site please review docker-compose.yml file and execute docker-compose up -d command in the folder that has beeen created or execute the start-site script"
 echo -e "A domain.loc entry may be added in your hosts file for convenience, modifying home and siteurl database options accordingly"
