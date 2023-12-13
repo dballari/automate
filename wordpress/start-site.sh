@@ -24,4 +24,7 @@ cd "${BASE_SERVER_PATH}/$1"
 pwd
 
 docker-compose up -d
-
+echo -e "Waiting a bit ... please be patient"
+sleep 6
+sudo chmod -R 770 wp-app
+echo -e "Changed wp-app file permissions"

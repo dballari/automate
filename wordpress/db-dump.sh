@@ -14,20 +14,12 @@
 #
 # Usage
 #
-# ./start-site.sh folder
+# ./db-dump.sh folder domain pmadomain email blueprintrepo
 #-----------------------------------------------------------------------
 
+source ../.env
+echo -e "DB dump of a WordPress site"
+echo -e "Base server path: $BASE_SERVER_PATH"
 echo -e "Folder: $1"
-
-# Stop wp db and wpcli containers
-container_sufix="-wp-1"
-docker stop "$1${container_sufix}"
-
-container_sufix="-db-1"
-docker stop "$1${container_sufix}"
-
-container_sufix="-wpcli-1"
-docker stop "$1${container_sufix}"
-
-container_sufix="-pma-1"
-docker stop "$1${container_sufix}"
+cd ${BASE_SERVER_PATH}/$1
+sudo ./export.sh

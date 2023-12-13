@@ -20,14 +20,14 @@
 echo -e "Folder: $1"
 
 # Stop wp db and wpcli containers
-container_sufix="-wp-1"
+container_sufix="_wp_1"
 docker stop "$1${container_sufix}"
 
-container_sufix="-db-1"
+container_sufix="_db_1"
 docker stop "$1${container_sufix}"
 
-container_sufix="-wpcli-1"
+container_sufix="_wpcli_1"
 docker stop "$1${container_sufix}"
 
-container_sufix="-pma-1"
+container_sufix="_pma_1"
 docker stop "$1${container_sufix}"
