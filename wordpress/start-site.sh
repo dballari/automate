@@ -25,8 +25,11 @@ pwd
 
 docker-compose up -d
 echo -e "Waiting a bit ... please be patient"
-sleep 6
+
+sleep 35
+
+echo -e "Good to go!"
 sudo chown -R www-data:www-data wp-app
 sudo chown -R root:root wp-data
 sudo chmod -R 770 wp-app
-echo -e "Changed wp-app file permissions"
+echo -e "Changed wp-app and wp-data file owners and/or permissions"

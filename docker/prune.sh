@@ -14,20 +14,7 @@
 #
 # Usage
 #
-# ./start-site.sh folder
+# ./prune.sh
 #-----------------------------------------------------------------------
 
-echo -e "Folder: $1"
-
-# Stop wp db and wpcli containers
-container_sufix="_wp_1"
-docker stop "$1${container_sufix}"
-
-container_sufix="_db_1"
-docker stop "$1${container_sufix}"
-
-container_sufix="_wpcli_1"
-docker stop "$1${container_sufix}"
-
-container_sufix="_pma_1"
-docker stop "$1${container_sufix}"
+docker system prune -a

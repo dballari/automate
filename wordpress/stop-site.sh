@@ -14,20 +14,19 @@
 #
 # Usage
 #
-# ./start-site.sh folder
+# ./start-site.sh folder destroydata(true/false)
 #-----------------------------------------------------------------------
 
+source ../.env
+echo -e "Base server path: $BASE_SERVER_PATH"
 echo -e "Folder: $1"
+cd "${BASE_SERVER_PATH}/$1"
+pwd
 
-# Stop wp db and wpcli containers
-container_sufix="-wp-1"
-docker stop "$1${container_sufix}"
-
-container_sufix="-db-1"
-docker stop "$1${container_sufix}"
-
-container_sufix="-wpcli-1"
-docker stop "$1${container_sufix}"
-
-container_sufix="-pma-1"
-docker stop "$1${container_sufix}"
+if [[ $2 ]]; then 
+    echo -e "Stopping and removing data volume"
+    docker-compose down -v
+else
+    echo -e "Stopping"
+    docker-compose down
+fi
