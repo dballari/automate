@@ -21,7 +21,8 @@ source ../../.env
 echo -e "Creating new WordPress site in local environment"
 echo -e "Base server path: $BASE_SERVER_PATH"
 echo -e "Folder: $1"
-echo -e "Domain: $2"
+echo -e "Port: $2"
+echo -e "Pma Port: $3"
 cd $BASE_SERVER_PATH
 
 # Clone repo with the WordPress - Docker setup in the folder $1
@@ -59,7 +60,11 @@ else
     cp -r ${BASE_SERVER_PATH}/$4/wp-app ${BASE_SERVER_PATH}/$1/wp-app
     cp -r ${BASE_SERVER_PATH}/$4/wp-data ${BASE_SERVER_PATH}/$1/wp-data
     rm -rf ${BASE_SERVER_PATH}/$1/wp-app/.git
+    sudo chown -R www-data:www-data wp-app
+    sudo chown -R root:root wp-data
+    sudo chmod -R 770 wp-app
+    echo -e "Changed wp-app and wp-data file owners and/or permissions"
 fi
 
 echo -e "To create site please review docker-compose.yml file and execute docker-compose up -d command in the folder that has beeen created or execute the start-site script"
-echo -e "A domain.loc entry may be added in your hosts file for convenience, modifying home and siteurl database options accordingly"
+echo -e "An entry may be added in your hosts file for convenience, modifying home and siteurl database options accordingly"
