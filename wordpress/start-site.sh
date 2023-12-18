@@ -20,7 +20,6 @@
 source ../.env
 echo -e "Base server path: $BASE_SERVER_PATH"
 echo -e "Folder: $1"
-echo -e "Change permissions: $2"
 cd "${BASE_SERVER_PATH}/$1"
 pwd
 
