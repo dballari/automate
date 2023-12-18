@@ -56,6 +56,9 @@ mv env.example.loc env.example
 if [[ $4 == "" ]]; then 
     echo -e "No wp-app and wp-data folders copied"
 else
+    #echo -e "Updating blueprint db dump $4"
+    #cd ..
+    #./db-dump.sh $4
     echo -e "Copying wp-app and wp-data folders from $4"
     cp -r ${BASE_SERVER_PATH}/$4/wp-app ${BASE_SERVER_PATH}/$1/wp-app
     cp -r ${BASE_SERVER_PATH}/$4/wp-data ${BASE_SERVER_PATH}/$1/wp-data
@@ -66,5 +69,5 @@ else
     echo -e "Changed wp-app and wp-data file owners and/or permissions"
 fi
 
-echo -e "To create site please review docker-compose.yml file and execute docker-compose up -d command in the folder that has beeen created or execute the start-site script"
+echo -e "To start site please review docker-compose.yml file and execute docker-compose up -d command in the folder that has beeen created or execute the start-site script"
 echo -e "An entry may be added in your hosts file for convenience, modifying home and siteurl database options accordingly"

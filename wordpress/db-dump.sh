@@ -14,14 +14,14 @@
 #
 # Usage
 #
-# ./db-dump.sh folder domain pmadomain email blueprintrepo
+# ./db-dump.sh folder
 #-----------------------------------------------------------------------
 
 source ../.env
 echo -e "DB dump of a WordPress site"
 echo -e "Base server path: $BASE_SERVER_PATH"
 echo -e "Folder: $1"
-cd ${BASE_SERVER_PATH}/$1/wp-data
-sudo rm *.sql
+#cd ${BASE_SERVER_PATH}/$1/wp-data
+#sudo rm *.sql
 cd ${BASE_SERVER_PATH}/$1/
 sudo ./export.sh
